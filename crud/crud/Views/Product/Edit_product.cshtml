@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Edit_product";
+}
+
+<h2>Edit_product</h2>
+
+
+<h2>Edit Product</h2>
+<form method="post">
+    <input type="hidden" name="Id" value="@Model.id" />
+    <input type="text" name="Name" value="@Model.name" />
+    <input type="text" name="Price" value="@Model.price" />
+    <section>
+
+        @Html.DropDownList("cateId", ViewBag.catelist as SelectList, "----select---", new { @class = "form-control" })
+
+
+    </section>
+
+
+    <input type="submit" value="Update" class="btn btn-warning" />
+</form>

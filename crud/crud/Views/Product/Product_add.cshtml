@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Product_add";
+}
+
+<h2>Product_add</h2>
+
+<form action="" method="post">
+
+    <input type="text" name="name" placeholder="name" />
+    <input type="text" name="price" placeholder="Price" />
+    <section>
+
+        @Html.DropDownList("CateId", ViewBag.catelist as SelectList, "----select---", new { @class = "form-control" })
+
+
+    </section>
+
+    <br />
+    <input type="submit" name="submit" class="btn  btn-success" value="submit" />
+
+</form>

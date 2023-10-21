@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="productModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="categorize">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="products" Relationship="Self.FK_products_categorizes" FromRole="categorizes" ToRole="products" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cateid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="categorize" Relationship="Self.FK_products_categorizes" FromRole="products" ToRole="categorizes" />
+  </EntityType>
+  <Association Name="FK_products_categorizes">
+    <End Role="categorizes" Type="Self.categorize" Multiplicity="1" />
+    <End Role="products" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categorizes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="cateid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="productEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categorizes" EntityType="Self.categorize" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <AssociationSet Name="FK_products_categorizes" Association="Self.FK_products_categorizes">
+      <End Role="categorizes" EntitySet="categorizes" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
