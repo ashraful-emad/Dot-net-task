@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_outerview.cshtml";
+}
+
+<h2>Login</h2>
+
+<form action="/Login/login" method="post">
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Message</div>
+    }
+
+
+    <label for="user_name">Username</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <input type="submit" class="btn btn-success" value="Login">
+</form>

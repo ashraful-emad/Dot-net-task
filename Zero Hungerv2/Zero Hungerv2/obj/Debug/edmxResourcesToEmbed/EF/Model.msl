@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="zero_hungerModelStoreContainer" CdmEntityContainer="zero_hungerEntities">
+    <EntitySetMapping Name="asigns">
+      <EntityTypeMapping TypeName="zero_hungerModel.asign">
+        <MappingFragment StoreEntitySet="asigns">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ord_id" ColumnName="ord_id" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="zero_hungerModel.order">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="order_name" ColumnName="order_name" />
+          <ScalarProperty Name="production" ColumnName="production" />
+          <ScalarProperty Name="expire" ColumnName="expire" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="restaurant_id" ColumnName="restaurant_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="zero_hungerModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

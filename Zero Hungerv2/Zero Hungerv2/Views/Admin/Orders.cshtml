@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_innerview_Admin.cshtml";
+}
+
+<h2>Orders</h2>
+
+<table class="table table-bordered">
+
+
+    <tr>
+        <th>Order ID</th>
+        <th>Order Name</th>
+        <th>Production Date</th>
+        <th> Expired Date</th>
+        <th>Restaurant name</th>
+        <th>Status</th>
+        <th></th>
+    </tr>
+
+    @foreach(var c in Model)
+            {
+
+        <tr>
+
+            <td>@c.order_id</td>
+            <td>@c.order_name</td>
+            <td>@c.production</td>
+            <td>@c.expire</td>
+            <td>@c.user.name</td>
+            <td>@c.status</td>
+            <td>@Html.ActionLink("Remove", "Remove", new { order_id = c.order_id })</td>
+
+        </tr>
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+</table>

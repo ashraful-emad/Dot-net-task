@@ -1,0 +1,34 @@
+﻿@model List<login.EF.Product>
+@{
+    ViewBag.Title = "Customer_Index";
+}
+
+<h2>Customer_Index</h2>
+<h2>Welcome, @ViewBag.user_name!</h2>
+
+<a href="/Customer/Viewcart"> Viewcart</a>
+<a href="/Login/login"> Logout</a>
+
+
+    <table class="table table-bordered">
+        <tr>
+            <th>name</th>
+            <th>price</th>
+            <th>quantity</th>
+            <th></th>
+        </tr>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.name</td>
+                <td>@c.price</td>
+                <td>
+                    <form action="@Url.Action("AddtoCart", "Customer")" method="post">
+                        <input type="hidden" name="productId" value="@c.id" />
+                        <input type="number" name="quantity" placeholder="Input quantity" />
+                        <input type="submit" value="Add to Cart" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>

@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="zero_hungerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="asigns">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ord_id" Type="int" Nullable="false" />
+          <Property Name="emp_id" Type="int" Nullable="false" />
+          <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="production" Type="date" Nullable="false" />
+          <Property Name="expire" Type="date" Nullable="false" />
+          <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="restaurant_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_asigns_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="asigns" Type="Self.asigns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="asigns">
+              <PropertyRef Name="ord_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_asigns_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="asigns" Type="Self.asigns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="asigns">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="restaurant_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="zero_hungerModelStoreContainer">
+          <EntitySet Name="asigns" EntityType="Self.asigns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_asigns_orders" Association="Self.FK_asigns_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="asigns" EntitySet="asigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_asigns_users" Association="Self.FK_asigns_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="asigns" EntitySet="asigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_users" Association="Self.FK_orders_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="zero_hungerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="asign">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ord_id" Type="Int32" Nullable="false" />
+          <Property Name="emp_id" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="order" Relationship="Self.FK_asigns_orders" FromRole="asigns" ToRole="orders" />
+          <NavigationProperty Name="user" Relationship="Self.FK_asigns_users" FromRole="asigns" ToRole="users" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="production" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="expire" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="restaurant_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="asigns" Relationship="Self.FK_asigns_orders" FromRole="orders" ToRole="asigns" />
+          <NavigationProperty Name="user" Relationship="Self.FK_orders_users" FromRole="orders" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="asigns" Relationship="Self.FK_asigns_users" FromRole="users" ToRole="asigns" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_users" FromRole="users" ToRole="orders" />
+        </EntityType>
+        <Association Name="FK_asigns_orders">
+          <End Role="orders" Type="Self.order" Multiplicity="1" />
+          <End Role="asigns" Type="Self.asign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="asigns">
+              <PropertyRef Name="ord_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_asigns_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="asigns" Type="Self.asign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="asigns">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="orders" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="restaurant_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="zero_hungerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="asigns" EntityType="Self.asign" />
+          <EntitySet Name="orders" EntityType="Self.order" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_asigns_orders" Association="Self.FK_asigns_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="asigns" EntitySet="asigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_asigns_users" Association="Self.FK_asigns_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="asigns" EntitySet="asigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_users" Association="Self.FK_orders_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="zero_hungerModelStoreContainer" CdmEntityContainer="zero_hungerEntities">
+          <EntitySetMapping Name="asigns">
+            <EntityTypeMapping TypeName="zero_hungerModel.asign">
+              <MappingFragment StoreEntitySet="asigns">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ord_id" ColumnName="ord_id" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="zero_hungerModel.order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="order_name" ColumnName="order_name" />
+                <ScalarProperty Name="production" ColumnName="production" />
+                <ScalarProperty Name="expire" ColumnName="expire" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="restaurant_id" ColumnName="restaurant_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="zero_hungerModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

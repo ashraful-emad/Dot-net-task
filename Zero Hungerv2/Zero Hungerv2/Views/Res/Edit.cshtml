@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_innerview_res.cshtml";
+}
+
+<h2>Edit</h2>
+<form action="/Res/Edit" method="post">
+
+    <input type="hidden" name="order_id" value="@Model.order_id" />
+    <input type="text" name="order_name" placeholder="Order name" value="@Model.order_name" />
+    <br />
+    <input type="date" name="production" placeholder="Production" value="@Model.production" />
+    <br />
+    <input type="date" name="expire" placeholder="expire" value="@Model.expire" />
+    <br />
+    <input type="hidden" name="status" value="Orderd" />
+    <br /> 
+    <br />
+    <input type="submit" class="btn btn-success" value="Update" />
+
+
+</form>

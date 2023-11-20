@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_innerview_res.cshtml";
+}
+<h2>Welcome, @ViewBag.user_name!</h2>
+<h2>Index</h2>
+
+<form action="" method="post">
+
+    <label for="order_name">Order Name:</label><br>
+    <input type="text" name="order_name" placeholder="Order name" />
+    <br /><br />
+
+    <label for="production">Production Date :</label><br>
+    <input type="date" name="production" placeholder="Production" />
+    <br /> <br />
+
+    <label for="fname">Expire Date:</label><br>
+    <input type="date" name="expire" placeholder="expire" />
+    <br /> <br />
+
+
+    <input type="hidden" name="status" value="Orderd" />
+    <br />
+
+
+    <input type="hidden" name="restaurant_id" value="@ViewBag.id" />
+    <br />
+    <input type="submit" class="btn btn-success" value="Submit" />
+
+
+
+
+
+</form>

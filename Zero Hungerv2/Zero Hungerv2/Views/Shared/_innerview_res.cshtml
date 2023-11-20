@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Restaurant</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div>
+        <a class="btn btn-primary" href="/Res/Index">Dashboard</a>
+        <a class="btn btn-danger" href="/Res/Order">Orders</a>
+        <a class="btn btn-warning" href="/Login/logout">Logout</a>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+    <div>
+        Copyright @@
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

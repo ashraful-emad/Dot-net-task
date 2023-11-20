@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Assign";
+    Layout = "~/Views/Shared/_innerview_Admin.cshtml";
+}
+
+<h2>Assign</h2>
+
+<table class="table table-bordered" >
+
+    <tr>
+
+        <th>Id</th>
+        <th>Order ID </th>
+        <th>Order Name</th>
+        <th>Employee Name </th>
+        <th>Employee Id</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach(var c in Model)
+            {
+
+             <tr>
+
+                 <td>@c.id</td>
+                 <td>@c.ord_id</td>
+                 <td>@c.order.order_name</td>
+                 <td>@c.user.name</td>
+                 <td>@c.emp_id</td>
+                 <td>Edit</td>
+                 <td>Remove</td>
+             </tr>
+
+
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+</table>
